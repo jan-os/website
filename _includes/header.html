@@ -1,0 +1,9 @@
+<header>
+  <div class="menu">
+    <a {% if include.page == 'home' %}class="current"{% endif %} href="/">Home</a>
+    <a {% if include.page == 'device-list' %}class="current"{% endif %}href="#">Device List</a>
+    <a {% if include.page == 'download' %}class="current"{% endif %}href="#">Download</a>
+    <a {% if include.page == 'docs' %}class="current"{% endif %}href="#">Documentation</a>
+  </div>
+  <a class="title" href="/">JanOS</a>
+</header>

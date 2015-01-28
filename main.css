@@ -9,7 +9,7 @@ html, body {
 
 body>*:not(header) {
   max-width: 1100px;
-  margin-left: calc((100vw - 1100px) / 2);
+  margin: 0 auto;
 }
 
 header {
@@ -23,7 +23,6 @@ header {
 
 header .menu {
   flex-grow: 1;
-  font-size: 1rem;
   display: flex;
 }
 
@@ -31,9 +30,18 @@ header .title {
   align-self: center;
   font-size: 1.4rem;
   font-weight: 300;
+  display: block;
+  text-decoration: none;
+  color: white;
 }
 
-header a {
+@media (max-width: 1100px) {
+  header .title {
+    padding-right: 2rem;
+  }
+}
+
+.menu a {
   color: white;
   display: block;
   text-decoration: none;
@@ -41,7 +49,7 @@ header a {
   position: relative;
   margin: 0rem 0.1rem;
 }
-header a.current::after {
+.menu a.current::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -50,7 +58,7 @@ header a.current::after {
   width: 100%;
   left: 0;
 }
-header a:hover {
+.menu a:hover {
   background: #0095DD;
 }
 .yolo {

@@ -1,20 +1,15 @@
+---
+title:   JanOS - A second life for your smartphone
+---
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>JanOS - A second life for your smartphone</title>
+  <title>{{ page.title }}</title>
   <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-  <header>
-    <div class="menu">
-      <a class="current" href="#">Home</a>
-      <a href="#">Device List</a>
-      <a href="#">Download</a>
-      <a href="#">Documentation</a>
-    </div>
-    <div class="title">JanOS</div>
-  </header>
+  {% include header.html page="home" %}
   <div class="yolo section">
     <div class="banana" title="Banana for scale"></div>
     <div class="story">
