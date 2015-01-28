@@ -1,0 +1,128 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic);
+
+html, body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem;
+  background: #00539F;
+  color: white;
+}
+
+header .menu {
+  flex-grow: 1;
+  font-size: 1rem;
+  display: flex;
+}
+
+header .title {
+  align-self: center;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+header a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  position: relative;
+  margin: 0rem 0.1rem;
+}
+header a.current::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 0.3rem;
+  background: #0095DD;
+  width: 100%;
+  left: 0;
+}
+header a:hover {
+  background: #0095DD;
+}
+.yolo {
+  display: flex;
+}
+.yolo .banana {
+  height: 34.5vw;
+  width: 40vw;
+  background-image: url("banana.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
+.story {
+  margin: 0 2rem;
+  align-self: center;
+}
+.story h1 {
+  font-weight: 300;
+  color: #E66000;
+  font-size: 4rem;
+  margin: 0;
+}
+.story h2 {
+  font-weight: 400;
+  margin: 0;
+  color: #FF9500;
+}
+.section {
+  border-bottom: solid 1px #4D4E53;
+}
+.section.secondary {
+  padding: 1rem;
+}
+
+li {
+  line-height: 1.8rem;
+}
+.secondary a {
+  color: #0095DD;
+  text-decoration: none;
+}
+.secondary a:hover {
+  color: #00539F;
+}
+
+h3 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: #4D4E53;
+}
+
+a.button {
+  display: inline-block;
+  border: solid 1px black;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem;
+}
+a.button {
+  color: #0095DD;
+  border-color: #0095DD;
+}
+a.button:hover {
+  background: rgba(0, 150, 221, 0.1);
+}
+
+.footer {
+  padding: 1rem;
+  color: #aaa;
+}
+.footer a {
+  color: #aaa;
+}
+.code {
+  background: #eee;
+  font-family: monospace;
+  padding: 0.3rem;
+}
