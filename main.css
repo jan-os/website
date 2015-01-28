@@ -7,12 +7,18 @@ html, body {
   font-size: 16px;
 }
 
+body>*:not(header) {
+  max-width: 1100px;
+  margin-left: calc((100vw - 1100px) / 2);
+}
+
 header {
   display: flex;
   flex-direction: row;
   padding: 0 1rem;
   background: #00539F;
   color: white;
+  padding: 0 calc((100vw - 1100px) / 2);
 }
 
 header .menu {
