@@ -1,0 +1,83 @@
+---
+layout:          default
+tab:             docs
+title:           Internet connectivity - JanOS
+---
+<div class="yolo section article">
+  <div class="story left">
+    <h1>Internet connectivity</h1>
+    <p>
+      JanOS can connect to the internet using both WiFi and cellular network.
+      This article guides you through the configuration of both,
+      and shows you how to connect the WiFi and cellular antenna.
+    </p>
+  </div>
+  <div class="paper-antenna" title="GeeksPhone Peak with paper WiFi antenna attached"></div>
+</div>
+<div class="section secondary">
+  <h3>Configuration</h3>
+  <p>
+    To connect to WiFi and cellular you'll need a configuration file present.
+    The easiest way to create this is to rename the file
+    <span class="code">apps/system/js/local_settings.json.example</span>
+    to <span class="code">local_settings.json</span> in the same folder.
+    In here you can specify whether to enable WiFi, the name of the network and
+    the password. If you have a network that does not require a password this
+    field is ignored.
+  </p>
+  <p>
+    The same goes for the cellular section.
+    You can configure the SIM PIN code, whether the use roaming,
+    or limit data connectivity over 2G.
+    A more in depth description is listed in
+    <a href="/articles/first-app.html#send-sms">Writing your first application</a>.
+  </p>
+  <p>
+    From code you do not have to bother whether the board is connected through
+    WiFi or cellular.
+    You can subscribe to generic online and offline events which will fire
+    regardless of connection type.
+  </p>
+  <pre class="code">
+window.addEventListener('online', () => {
+  console.log('We\'re online!');
+});
+
+window.addEventListener('offline', () => {
+  console.log('Lost connection');
+});</pre>
+</div>
+<div class="section secondary">
+  <h3>WiFi Antenna</h3>
+  <p>
+    There are two antennas that are essential for connectivity through JanOS.
+    The first one is the WiFi antenna.
+    On the phones we've seen so far this is always a paper antenna (like the one above)
+    which is glued to the casing of your phone and connects with some copper colored
+    points to the mainboard.
+    If you want to use WiFi on the board, use the screwdriver approach to un-glue
+    the antenna, and attach it to the mainboard with some anti-static tape.
+  </p>
+  <p>
+    <img src="/img/mainboard-wifi1.jpg"> <img src="/img/mainboard-wifi2.jpg">
+  </p>
+</div>
+<div class="section secondary">
+  <h3>Cellular antenna</h3>
+  <p>
+    The second antenna is the cellular antenna.
+    On some phones, like the Spreadtrum based ones, and the ZTE Open C,
+    the antenna is integrated on the mainboard.
+    In this case you do not have to do anything.
+    On other phones, the antenna is separate and connects to the mainboard.
+    It should be easy enough to spot.
+    Also remove the antenna from the casing, and connect the antenna again to the board.
+    There is only one connection point for it, so shouldn't be too hard.
+  </p>
+  <p>
+    <img src="/img/mainboard-cellular.jpg">
+  </p>
+  <p>
+    <em>Antenna (C8680 GP) of the GeeksPhone Peak</em>
+  </p>
+</div>

@@ -1,7 +1,7 @@
 ---
 layout:  default
 tab:     home
-title:   JanOS - A second life for your smartphone
+title:   JanOS - Turn your phone into an IoT board
 ---
 <div class="yolo section">
   <div class="banana" title="Banana for scale"></div>
@@ -45,24 +45,17 @@ title:   JanOS - A second life for your smartphone
       or <a href="/device-list.html#how-to-build">build your own</a>
     </li>
     <li>Clone <a target="_blank" href="http://github.com/jan-os/janos">our app template</a>
-      and write <a href="#">your first program</a></li>
+      and write <a href="/articles/first-app.html">your first program</a></li>
     <li>Run <span class="code">make reset-phone</span> to update the device</li>
     <li>When all is up and running,
-      <a href="#">screw open your device</a> and remove the mainboard</li>
+      <a target="_blank" href="http://youtu.be/Uy062kp-LM4?t=5m11s">screw open your device</a>
+      and remove the mainboard</li>
     <li>Build the mainboard into something else</li>
     <li>PROFIT!</li>
   </ol>
 </div>
 <div class="section secondary">
   <h3>FAQ</h3>
-  <p>
-    <strong>What about power efficiency?</strong>
-    This depends on the mobile phone you use as a base.
-    General idle consumption over 2G is 5 - 10 mA per hour.
-    You can use a digital USB ammeter to measure the actual consumption.
-    <a target="_blank" href="https://hacks.mozilla.org/2014/04/measuring-power-consumption-on-phones/">
-      Read more here</a>.
-  </p>
   <p>
     <strong>Can I attach sensors or LEDs?</strong>
     Most phones have some
@@ -76,21 +69,30 @@ title:   JanOS - A second life for your smartphone
     <strong>Does it run native code?</strong>
     You can compile any C/C++ binary for the ARMv7 architecture using
     the Android NDK / toolchains, and
-    use the <a href="#">mozOs.exec</a> API to invoke the binary from
+    use the <a href="/api-reference/exec.html">mozOs.exec</a> API to invoke the binary from
     JanOS. <a href="#">Example</a>.
+  </p>
+  <p>
+    <strong>What about power efficiency?</strong>
+    This depends on the mobile phone you use as a base.
+    General idle consumption over 2G is 5 - 10 mA per hour.
+    You can use a digital USB ammeter to measure the actual consumption.
+    <a target="_blank" href="https://hacks.mozilla.org/2014/04/measuring-power-consumption-on-phones/">
+      Read more here</a>.
   </p>
   <p>
     <strong>Do I need a battery?</strong>
     So far all phones we encountered need a battery connected for most
     things (booting, searching for WiFi networks, etc.).
     It's quite easy to solder a battery to the board though.
-    If you use soldering wire you can position it behind the board
+    If you use soldering wire you can position it
+    <a href="/img/gonzo-worked-open.jpg">behind the board</a>
     without much hassle.
   </p>
   <p>
     <strong>Is there a debugger?</strong>
     You can use the
-    <a href="https://developer.mozilla.org/en-US/docs/Tools/WebIDE">WebIDE</a>,
+    <a href="/articles/first-app.html#debugger">WebIDE</a>,
     which is part of the Firefox Developer Tools to connect to your device
     and debug it.
   </p>

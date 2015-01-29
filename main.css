@@ -88,6 +88,22 @@ header .title {
   background-size: auto 100%;
   flex-shrink: 0;
 }
+.yolo .messy-desk {
+  height: 22.5vw;
+  width: 40.18vw;
+  background-image: url("img/messy-desk.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
+.yolo .paper-antenna {
+  height: 22.5vw;
+  width: 26.78vw;
+  background-image: url("img/paper-antenna.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
 .story {
   margin: 0 2rem;
   align-self: center;
@@ -122,11 +138,11 @@ header .title {
 li {
   line-height: 1.8rem;
 }
-.secondary a {
+.secondary a, .api a {
   color: #0095DD;
   text-decoration: none;
 }
-.secondary a:hover {
+.secondary a:hover, .api a:hover {
   color: #00539F;
 }
 
@@ -173,4 +189,7 @@ p.code, pre.code {
 .api h1 {
   font-size: 3rem;
   margin-top: 1rem;
+}
+.article h1 {
+  font-size: 3rem;
 }

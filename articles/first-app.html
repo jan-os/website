@@ -1,0 +1,214 @@
+---
+layout:          default
+tab:             docs
+title:           Writing your first application - JanOS
+---
+<div class="yolo section article">
+  <div class="story left">
+    <h1>First application</h1>
+    <p>
+      This is a quickstart guide to write your first application on top of JanOS.
+      Debugging is easier when you don't disconnect the mainboard from the screen yet.
+      If you need inspiration, we also have a bunch of examples available.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="https://github.com/jan-os/janos/#what-can-it-do">
+        View our examples
+      </a>
+    </p>
+  </div>
+  <div class="messy-desk" title="This is how your desk will look like when doing this"></div>
+</div>
+<div class="section secondary">
+  <h3>Getting source and flashing</h3>
+  <p>
+    When your board boots, it essentially boots into a web browser.
+    This web browser then opens a single HTML page.
+    This HTML page can then load extra JavaScript that can interact with the board.
+    In this guide we'll write some code that vibrates your board; takes a photo;
+    and sends a SMS message.
+  </p>
+  <p>
+    First we need to get the base template.
+    This is the main application that runs on your board.
+    You can customize the template to load your own JavaScript.
+    It also comes with a number of handy functions, including WiFi and 2G/3G
+    data management. Start by cloning <a href="http://github.com/jan-os/janos/">jan-os/janos</a>.
+    After you cloned the repository, open a terminal and run: <span class="code">make install-phone</span>
+    to push the data to your board.
+    After this you should see the following data in your terminal.
+  </p>
+  <pre class="code">3 files pushed. 0 files skipped.
+3337 KB/s (893137 bytes in 0.261s)
+[cmd] sh -c adb push "/Volumes/repos/janos/profile/user.js" //data/local/user.js
+750 KB/s (2452 bytes in 0.003s)
+[push] Restarting B2G...
+[cmd] sh -c adb shell start b2g</pre>
+  <p>
+    At this point the device should show the JanOS logo, and say 'Booting',
+    which transforms into 'Ready' after a few seconds.
+  </p>
+</div>
+<div class="section secondary" id="debugger">
+  <h3>Attaching the debugger</h3>
+  <p>
+    If you made some changes and the device does not finish booting,
+    or something does not go according to plan,
+    there is a debugger present which allows you to troubleshoot quickly.
+    JanOS is compatible with the protocol used by the
+    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Tools/WebIDE">Firefox WebIDE</a>.
+    This is part of the normal Firefox Desktop developer tools, so
+    <a target="_blank" href="https://www.mozilla.org/en-US/firefox/new/">install Firefox</a>
+    (if you don't have it yet). Then:
+  </p>
+  <ul>
+    <li>After installing Firefox, go into Tools > Web Developer > WebIDE</li>
+    <li>On the right top corner, click 'Select Runtime'</li>
+    <li>If the device is not in the list yet, follow the instructions on the screen</li>
+    <li>In the left top dropdown, choose 'The OS'</li>
+    <li>The debugger tools are now attached</li>
+  </ul>
+  <p>
+    <img src="/img/started-webide.jpg">
+  </p>
+  <p>
+    In the 'Console' tab we can now execute some JavaScript that interacts with the device.
+    In here type: <span class="code">navigator.vibrate(200)</span> to make your board vibrate.
+    If needed, go into the Debugger tab and debug your code.
+  </p>
+</div>
+<div class="section secondary">
+  <h3>Taking a photo</h3>
+  <p>
+    Let's write some code that accesses the camera.
+    In the base template there is a small helper module (under js/api/camera.js)
+    to make dealing with the camera a bit easier.
+    If you feel adventurous: here's the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.mozCameras">official docs</a>.
+    We'll snap a photo from the back camera whenever someone presses the power button,
+    then we show the image on the screen.
+  </p>
+  <p>
+    Create a new file under the apps/system/js/ folder, and name it <em>first-app.js</em>.
+    Fill it with the following code:
+  </p>
+  <pre class="code">
+// First thing we do is wait until we're booted up
+window.addEventListener('ready', function() {
+  // This is the main code for your function
+  // We'll wait for a press on the POWER button, and in that case take a photo
+  window.addEventListener('mozChromeEvent', function(e) {
+    if (e.detail.type === 'sleep-button-press') {
+      // Call the camera helper to take a photo from the back camera
+      window.camera.takePicture('back')
+        // takePicture returns a promise
+        .then(function(res) {
+          // res contains a property 'blob' with the image data
+          // create an element to show it on the screen
+          var img = document.querySelector('img') || document.createElement('img');
+          img.src = URL.createObjectURL(res.blob);
+          // put it on the body
+          document.body.appendChild(img);
+        })
+        // in case something goes wrong (no camera f.e.),
+        // we log it to the debugging console
+        .catch(function(err) {
+          console.error('Taking photo failed', err);
+        });
+    }
+  });
+});</pre>
+  <p>
+    Now add the following line right before <span class="code">&lt;/head&gt;</span>
+    in apps/system/index.html:
+  </p>
+  <pre class="code">
+&lt;script defer src="js/first-app.js"&gt;&lt;/script&gt;</pre>
+  <p>
+    After running <span class="code">make install-gaia</span>, your power button
+    will now act as a camera shutter.
+    You can now use the data from the camera to store images on
+    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Storage_API">the internal storage</a>
+    or upload them to a server. Go crazy!
+  </p>
+</div>
+<div class="section secondary" id="send-sms">
+  <h3>Sending a SMS message</h3>
+  <p>
+    For this to work, first plug a SIM card into the SIM card slot of your board.
+    If you have a board with multiple SIM slots, put it in SIM1.
+  </p>
+  <p>
+    One of things JanOS does for you automatically, is dealing with the mobile network.
+    It will automatically sign on to the network for you, and can configure
+    your internet settings for you, including whether you'd like 2G or 3G.
+    It can also unlock your SIM PIN code.
+    To tell the OS your configuration, or your PIN code, there is a configuration
+    file.
+    This file is also used for other modules, like the WiFi module.
+    To get started copy <span class="code">apps/system/js/local_settings.json.example</span> to
+    <span class="code">apps/system/js/local_settings.json</span> and open the file in a text editor.
+  </p>
+  <pre class="code">
+"cellular": {
+  "roaming": false,
+  "edgeOnly": false,
+  "pin": "0000"
+}</pre>
+  <p>
+    The cellular section has three options:
+  </p>
+  <ul>
+    <li><span class="code">roaming</span> To use data when you're in a foreign country (can be expensive)</li>
+    <li><span class="code">edgeOnly</span> Connect to 2G even when 3G is supported, to save battery</li>
+    <li><span class="code">pin</span> SIM PIN code. Is not used when the SIM does not have PIN</li>
+  </ul>
+  <p>
+    Now when we configured this and pushed to the device, and you have a PIN code,
+    a message regarding pinRequired and pin unlock succeeded will show up in the console.
+    To use this SIM card to now send a SMS message, put the following code in
+    <em>first-app.js</em>.
+  </p>
+  <pre class="code">
+// First thing we do is wait until we're booted up
+window.addEventListener('ready', function() {
+  // Get reference to the connection of SIM1
+  var conn = navigator.mozMobileConnections[0];
+  // We can receive messages when connection status changes
+  conn.addEventListener('voicechange', function vc() {
+    // If we are connected to the phone network
+    if (conn.voice.connected) {
+      // Remove the event listener, so we don't send the SMS multiple times
+      conn.removeEventListener('voicechange', vc);
+
+      // Little safety timing here, sometimes we look connected but the network
+      // rejects the SMS message anyway.
+      setTimeout(function() {
+        // Fill in another phone number here
+        var req = navigator.mozMobileMessage.send('+31612345678', 'Hello from JanOS!');
+        req.onsuccess = function() {
+          console.log('Message sent successfully');
+        };
+        req.onerror = function() {
+          console.error('Could not send SMS', req.error);
+        };
+      }, 3000);
+    }
+  });
+});</pre>
+  <p>
+    Again, <span class="code">make install-gaia</span> and the moment the device
+    connects to the network, it will send a SMS message to your phone number.
+    Just remember to remove this code again, before your SMS costs go through the
+    roof ;-).
+  </p>
+</div>
+<div class="section secondary">
+  <h3>Conclusion</h3>
+  <p>
+    That concludes our first steps with JanOS.
+    You have seen how to push code to the device, attach the debugger,
+    talk to the camera, and talk to the mobile network.
+    Have fun hacking!
+  </p>
+</div>
