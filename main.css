@@ -67,7 +67,15 @@ header .title {
 .yolo .banana {
   height: 34.5vw;
   width: 40vw;
-  background-image: url("banana.jpg");
+  background-image: url("img/banana.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
+.yolo .keon-board-usb {
+  height: 22.5vw;
+  width: 30vw;
+  background-image: url("img/keon-board-usb.jpg");
   background-repeat: no-repeat;
   background-size: auto 100%;
   flex-shrink: 0;
@@ -75,6 +83,15 @@ header .title {
 .story {
   margin: 0 2rem;
   align-self: center;
+  flex-grow: 1;
+}
+.story.left {
+  margin-left: 0;
+}
+@media (max-width: 1100px) {
+  .story.left {
+    margin-left: 1rem;
+  }
 }
 .story h1 {
   font-weight: 300;
@@ -139,4 +156,9 @@ a.button:hover {
   background: #eee;
   font-family: monospace;
   padding: 0.3rem;
+  border-radius: 0.3rem;
+}
+p.code {
+  line-height: 1.8rem;
+  padding-left: 1rem;
 }

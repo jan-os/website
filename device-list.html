@@ -1,0 +1,115 @@
+---
+layout:    default
+tab:       device-list
+title:     Device List - JanOS
+---
+<div class="yolo section">
+  <div class="story left">
+    <h1>Device List</h1>
+    <p>
+      JanOS can run on any rooted device that can also run Firefox OS.
+      This includes devices shipped with Firefox OS, as well as Android
+      devices that received a port.
+      If your device is not listed, but it can run Android 4 or higher,
+      you can attempt a port yourself.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="https://developer.mozilla.org/en-US/Firefox_OS/Developing_Firefox_OS/Porting">
+        Porting instructions
+      </a>
+    </p>
+  </div>
+  <div class="keon-board-usb" title="GeeksPhone Peak mainboard"></div>
+</div>
+<div class="section secondary">
+  <h3>Fully supported devices</h3>
+  <p>
+    These devices are fully supported.
+    There are ready-to-flash builds available in the
+    <a href="/downloads.html">downloads</a> section, and you do not need
+    any additional configuration when building from scratch.
+    Depending on the device they can also already expose the GPIO ports.
+  </p>
+  <ul>
+    <li>GeeksPhone Keon <span class="code">(keon)</span></li>
+    <li>GeeksPhone Peak <span class="code">(peak)</span></li>
+    <li>Flame <span class="code">(flame / flame-kk)</span></li>
+  </ul>
+</div>
+<div class="section secondary">
+  <h3>Partially supported devices</h3>
+  <p>
+    The following devices are not fully supported but it should be possible
+    to build JanOS for them, <em>if they are rooted</em>.
+    Below the list there are instructions on how to build JanOS for them.
+  </p>
+  <ul>
+    <li>Samsung Galaxy S2 <span class="code">(galaxy-s2)</span></li>
+    <li>Samsung Galaxy Nexus <span class="code">(galaxy-nexus)</span></li>
+    <li>Nexus 4 <span class="code">(nexus-4 / nexus-4-kk)</span></li>
+    <li>Nexus 5 <span class="code">(nexus-5 / nexus-5-l)</span></li>
+    <li>Nexus S <span class="code">(nexus-s / nexus-s-4g)</span></li>
+    <li>Nexus 7 (2013) <span class="code">(flo)</span></li>
+    <li>ZTE Open <span class="code">(ikura)</span></li>
+    <li>ZTE Open C (<a href="https://developer.mozilla.org/en-US/Firefox_OS/Developer_phone_guide/ZTE_OPEN_C">special case</a>)</li>
+    <li>GoFox F15 <span class="code">(dolphin)</span></li>
+    <li>Intex Cloud FX / Spice Fire One / etc. (SC6821 based) <span class="code">(tarako)</span></li>
+  </ul>
+  <p>
+    To build for any of these devices, locate the device manifest file in
+    <a href="https://github.com/mozilla-b2g/b2g-manifest/">this repository</a>,
+    and save it on your local hard drive under <em>b2g-janos/janos-manifests/DEVICENAME.xml</em>.
+    Open the file and add under the <span class="code">&lt;remote ...</span> sections:
+  </p>
+  <p class="code">
+    &lt;remote name="jan-os" fetch="git://github.com/jan-os/" />
+  </p>
+  <p>
+    Then find the lines for all projects with name 'gaia'; 'gecko'; 'gonzo-misc',
+    and remove them. In their place add:
+  </p>
+  <p class="code">
+    &lt;project name="gecko" path="gecko" remote="jan-os" revision="master"/&gt;<br>
+    &lt;project name="janos" path="gaia" remote="jan-os" revision="master"/&gt;<br>
+    &lt;project name="gonk-misc" path="gonk-misc" remote="jan-os" revision="master"/&gt;
+  </p>
+</div>
+<div class="section secondary">
+  <h3 id="how-to-build">How to build</h3>
+  <p>
+    Building for most devices only works on Linux.
+    You'll need to install a number of build dependencies first.
+    They are <a href="https://developer.mozilla.org/en-US/Firefox_OS/Firefox_OS_build_prerequisites">listed</a>
+    on the Mozilla Developer Network.
+  </p>
+  <ol>
+    <li>Attach your device to your USB port and make sure it's visible via <span class="code">adb devices</span></li>
+    <li>Clone <a href="http://github.com/jan-os/b2g">jan-os/b2g</a></li>
+    <li>Run <span class="code">./config.sh DEVICENAME janos-manifests/DEVICENAME.xml</span></li>
+    <li>Run <span class="code">./build.sh</span></li>
+    <li>Run <span class="code">./flash.sh</span></li>
+  </ol>
+  <p>
+    If you did not disconnect the screen yet,
+    the device will show JanOS in ASCII art on the display.
+    If you disconnected the screen, attach the WebIDE to see if flashing succeeded.
+  </p>
+</div>
+<div class="section secondary">
+  <h3>How to build if you cannot build kernel</h3>
+  <p>
+    For some devices it is not possible to build the kernel (ZTE Open C,
+    or the GeeksPhones on OS/X). It's still possible to get part of JanOS.
+    You will not get any of the extra binaries or kernel-hacks like GPIO support,
+    but most stuff works.
+  </p>
+  <ol>
+    <li>Attach your device to your USB port and make sure it's visible via <span class="code">adb devices</span></li>
+    <li>Clone <a href="http://github.com/jan-os/b2g">jan-os/b2g</a></li>
+    <li>Run <span class="code">./config.sh DEVICENAME janos-manifests/DEVICENAME.xml</span></li>
+    <li>Run <span class="code">./build.sh gecko</span></li>
+    <li>Run <span class="code">./flash.sh gecko</span></li>
+    <li>Run <span class="code">./build.sh gaia</span></li>
+    <li>Run <span class="code">./flash.sh gaia</span></li>
+  </ol>
+</div>

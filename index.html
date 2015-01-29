@@ -1,102 +1,97 @@
 ---
+layout:  default
+tab:     home
 title:   JanOS - A second life for your smartphone
 ---
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="main.css" />
-</head>
-<body>
-  {% include header.html page="home" %}
-  <div class="yolo section">
-    <div class="banana" title="Banana for scale"></div>
-    <div class="story">
-      <h1>JanOS</h1>
-      <h2>Turn your phone into an IoT board</h2>
-      <p>
-        JanOS is an operating system designed to run on the chipset of
-        mobile phones. It runs without a screen, and allows you to access
-        all phone functionality, from calling to the camera, through
-        JavaScript APIs.
-      </p>
-      <p>
-        <a target="_blank" class="button video" href="https://www.youtube.com/watch?v=Uy062kp-LM4">
-          See video from JSConf.eu
-        </a>
-      </p>
-    </div>
-  </div>
-  <div class="section secondary">
-    <h3>Why?</h3>
+<div class="yolo section">
+  <div class="banana" title="Banana for scale"></div>
+  <div class="story">
+    <h1>JanOS</h1>
+    <h2>Turn your phone into an IoT board</h2>
     <p>
-      Current development boards for Internet of Things solutions have
-      one big problem: they are very expensive.
-      Boards like the Raspberry Pi or Arduino have a limited feature set
-      and simple extensions, like a GSM shield, can cost $80.
-      That is a shockingly high price when a full smartphone can be available
-      for just $30.
-      Why not break out the mainboard from a mobile phone and use that to
-      develop embedded projects? Cheaper and more powerful.
-    </p>
-    <a class="button" href="http://ee.telenor.io/gonzo/hardware/2014/12/16/firefox-os-iot.html" target="_blank">
-      Read more on our blog
-    </a>
-  </div>
-  <div class="section secondary">
-    <h3>Getting started</h3>
-    <ol>
-      <li>Get a mobile phone from our <a href="#">supported device list</a></li>
-      <li>Clone <a href="#">JanOS-b2g</a> and build for your appropriate device,
-        or get <a href="#">one of the ready-made builds</a></li>
-      <li>Clone <a target="_blank" href="http://github.com/janjongboom/janos">JanOS</a>
-        and write <a href="#">your first program</a></li>
-      <li>Run <span class="code">make reset-phone</span> to update the device</li>
-      <li>When all is up and running,
-        <a href="#">screw open your device</a> and remove the mainboard</li>
-      <li>Build the mainboard into something else</li>
-      <li>PROFIT!</li>
-    </ol>
-  </div>
-  <div class="section secondary">
-    <h3>FAQ</h3>
-    <p>
-      <strong>What about power efficiency?</strong>
-      This depends on the mobile phone you use as a base.
-      General idle consumption over 2G is 5 - 10 mA per hour.
-      You can use a digital USB ammeter to measure the actual consumption.
-      <a href="https://hacks.mozilla.org/2014/04/measuring-power-consumption-on-phones/">
-        Read more here</a>.
+      JanOS is an operating system designed to run on the chipset of
+      mobile phones. It runs without a screen, and allows you to access
+      all phone functionality, from calling to the camera, through
+      JavaScript APIs.
     </p>
     <p>
-      <strong>Are there any GPIO ports?</strong>
-      Most phones have some GPIO ports that you can use to attach extra
-      electronics to the board, like a LED light.
-      We wrote a <a href="#">blog post</a> describing the process of
-      attaching and controlling a LED on the GeeksPhone Keon.
-    </p>
-    <p>
-      <strong>Does it run native code?</strong>
-      You can compile any C/C++ binary for the ARMv7 architecture using
-      the Android NDK / toolchains, and
-      use the <a href="#">mozOs.exec</a> API to invoke the binary from
-      JanOS. <a href="#">Example</a>.
-    </p>
-    <p>
-      <strong>Do I need a battery?</strong>
-      So far all phones we encountered need a battery connected for most
-      things (booting, searching for WiFi networks, etc.).
-      It's quite easy to solder a battery to the board though.
-      If you use soldering wire you can position it behind the board
-      without much hassle.
+      <a target="_blank" class="button video" href="https://www.youtube.com/watch?v=Uy062kp-LM4">
+        See video from JSConf.eu
+      </a>
     </p>
   </div>
-  <div class="footer">
-    JanOS is a project from
-      <a href="http://telenordigital.com/" target="_blank">Telenor Digital</a>.
-    For more information or questions contact
-      <a href="mailto:jan@telenordigital.com">Jan Jongboom</a>.
-  </div>
-</body>
-</html>
+</div>
+<div class="section secondary">
+  <h3>Why?</h3>
+  <p>
+    Current development boards for Internet of Things solutions have
+    one big problem: they are very expensive.
+    Boards like the Raspberry Pi or Arduino have a limited feature set
+    and simple extensions, like a GSM shield, can cost $80.
+    That is a shockingly high price when a full smartphone can be available
+    for just $30.
+    Why not break out the mainboard from a mobile phone and use that to
+    develop embedded projects? Cheaper and more powerful.
+  </p>
+  <a class="button" href="http://ee.telenor.io/gonzo/hardware/2014/12/16/firefox-os-iot.html" target="_blank">
+    Read more on our blog
+  </a>
+</div>
+<div class="section secondary">
+  <h3>Getting started</h3>
+  <ol>
+    <li>Get a mobile phone from our <a href="/device-list.html">supported device list</a></li>
+    <li>Get a <a href="/downloads.html">ready-made build</a>,
+      or <a href="/device-list.html#how-to-build">build your own</a>
+    </li>
+    <li>Clone <a target="_blank" href="http://github.com/jan-os/janos">our app template</a>
+      and write <a href="#">your first program</a></li>
+    <li>Run <span class="code">make reset-phone</span> to update the device</li>
+    <li>When all is up and running,
+      <a href="#">screw open your device</a> and remove the mainboard</li>
+    <li>Build the mainboard into something else</li>
+    <li>PROFIT!</li>
+  </ol>
+</div>
+<div class="section secondary">
+  <h3>FAQ</h3>
+  <p>
+    <strong>What about power efficiency?</strong>
+    This depends on the mobile phone you use as a base.
+    General idle consumption over 2G is 5 - 10 mA per hour.
+    You can use a digital USB ammeter to measure the actual consumption.
+    <a target="_blank" href="https://hacks.mozilla.org/2014/04/measuring-power-consumption-on-phones/">
+      Read more here</a>.
+  </p>
+  <p>
+    <strong>Can I attach sensors or LEDs?</strong>
+    Most phones have some
+    <a href="http://en.wikipedia.org/wiki/General-purpose_input/output">GPIO ports</a>
+    that you can use to attach extra
+    electronics to the board, like a LED light.
+    We wrote a <a href="#">blog post</a> describing the process of
+    attaching and controlling a LED on the GeeksPhone Keon.
+  </p>
+  <p>
+    <strong>Does it run native code?</strong>
+    You can compile any C/C++ binary for the ARMv7 architecture using
+    the Android NDK / toolchains, and
+    use the <a href="#">mozOs.exec</a> API to invoke the binary from
+    JanOS. <a href="#">Example</a>.
+  </p>
+  <p>
+    <strong>Do I need a battery?</strong>
+    So far all phones we encountered need a battery connected for most
+    things (booting, searching for WiFi networks, etc.).
+    It's quite easy to solder a battery to the board though.
+    If you use soldering wire you can position it behind the board
+    without much hassle.
+  </p>
+  <p>
+    <strong>Is there a debugger?</strong>
+    You can use the
+    <a href="https://developer.mozilla.org/en-US/docs/Tools/WebIDE">WebIDE</a>,
+    which is part of the Firefox Developer Tools to connect to your device
+    and debug it.
+  </p>
+</div>
