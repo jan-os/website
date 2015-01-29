@@ -166,7 +166,11 @@ a.button:hover {
   padding: 0.3rem;
   border-radius: 0.3rem;
 }
-p.code {
+p.code, pre.code {
   line-height: 1.8rem;
   padding-left: 1rem;
+}
+.api h1 {
+  font-size: 3rem;
+  margin-top: 1rem;
 }

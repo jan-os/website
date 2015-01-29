@@ -1,0 +1,36 @@
+---
+layout:          api
+title:           Process Execution API - JanOS
+apiTitle:        Process API
+apiDescription:  The process execution API allows you to run arbitrary executables
+                 from JavaScript. Read our docs on <a href="#">cross compiling</a>
+                 executables for JanOS.
+                 It's function are exposed under <span class="code">navigator.mozOs</span>.
+---
+<div class="section secondary" id="readFile">
+  <h3>Running an executable</h3>
+  <p>
+    At the moment this API does not allow streaming, or writing to stdin.
+    We welcome <a href="#">pull requests</a>.
+  </p>
+  <pre class="code">
+Promise<MozOsExecResponse> exec(DOMString path, optional sequence<DOMString> args);
+
+interface MozOsExecResponse {
+  readonly attribute long exitCode;
+  readonly attribute DOMString stdout;
+  readonly attribute DOMString stderr;
+};</pre>
+  <ul>
+    <li><span class="code">path</span> The path to the executable (respects PATH)</li>
+    <li><span class="code">args</span> An array of arguments to pass into the executable</li>
+    <li><span class="code">returns</span> A promise which resolves with an object with exitCode, stdout and stderr data</li>
+  </ul>
+  <p>
+    Example:
+  </p>
+  <pre class="code">
+navigator.mozOs.exec('ls', [ '-al', '/data/local' ])
+  .then(res => console.log('exec', res.exitCode, res.stdout, res.stderr))
+  .catch(err => console.error('exec failed', err));</pre>
+</div>
