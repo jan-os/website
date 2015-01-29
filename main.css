@@ -80,6 +80,14 @@ header .title {
   background-size: auto 100%;
   flex-shrink: 0;
 }
+.yolo .gonzo-worked-open {
+  height: 22.5vw;
+  width: 30vw;
+  background-image: url("img/gonzo-worked-open.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
 .story {
   margin: 0 2rem;
   align-self: center;
