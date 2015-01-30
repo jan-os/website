@@ -1,0 +1,149 @@
+---
+layout:          default
+tab:             docs
+title:           Some examples - JanOS
+---
+<div class="yolo section article">
+  <div class="story left">
+    <h1>Examples</h1>
+    <p>
+      You flashed your device with JanOS, now it's time to test some examples
+      that come bundled with the OS.
+      This guide does not require you to do any hard programming,
+      but you will need to know how to connect the debugging tools.
+      All the examples can be run from the debugging console.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="/articles/first-app.html#debugger">
+        Learn how to connect the debugger
+      </a>
+    </p>
+  </div>
+  <div class="cover-image briantracker" title="A tracker is one of the examples in this article"></div>
+</div>
+
+<div class="section secondary">
+  <h3>Device Motion</h3>
+  <p>
+    The board contains a couple of sensors on which you can measure device motion.
+    For example: the accelerometer or the gyroscope.
+    This example logs the values on the Z-axis of the accelerometer to the
+    console window. This is the axis on which you can measure gravity.
+    For example, see what happens when you turn the board upside down.
+  </p>
+  <pre class="code">
+devicemotion.start();
+
+// to stop
+devicemotion.stop();</pre>
+</div>
+
+<div class="section secondary">
+  <h3>Security Camera</h3>
+  <p>
+    The security camera demo makes a photo on a set interval, and saves it
+    to the internal storage of the device.
+    When you're done with the camera, you can pull the images off the device
+    through adb.
+    If you have two cameras on the board, you can use 'front' instead of
+    'back' as well.
+  </p>
+  <pre class="code">
+securityCam.start('back', 5000);
+
+// it will now make a photo every 5s. and log a message
+// when you're done:
+securityCam.stop();</pre>
+  <p>
+    Now you can grab the photos of the device via adb.
+    Navigate to an empty folder, and run the following command:
+  </p>
+  <pre class="code">
+$ adb pull /data/local/security/ .</pre>
+</div>
+
+<div class="section secondary">
+  <h3>Bluetooth doorbell</h3>
+  <p>
+    For this example you'll need a bluetooth speaker.
+    We'll connect to the bluetooth speaker, and then use the
+    proximity sensor (on the front top of your board) to detect when someone
+    is close to the sensor.
+    If that's the case we'll play a sound over the speaker.
+    If you don't know the bluetooth address of your speaker, enable it and then
+    run:
+  </p>
+  <pre class="code">
+window.findBluetoothDevices();
+
+// Will log something like:
+"Starting discovery"
+"Found device" "00:0C:8A:75:EF:31" "Bose Mini Sou" "audio-card"
+"Stopping discovery"</pre>
+  <p>
+    We now use the address that has been logged to start the demo:
+  </p>
+  <pre class="code">
+doorbell.start("00:0C:8A:75:EF:31");
+
+// And to stop
+doorbell.stop();</pre>
+  <p>
+    Hover your hand over the proximity sensor to hear the doorbell sound playing.
+  </p>
+</div>
+
+<div class="section secondary">
+  <h3>Tracker</h3>
+  <p>
+    This example uses a combination of APIs to make a tracking device.
+    It connects to the internet, and registers with the push server.
+    Whenever someone sends a push message to the device, the device will wake up,
+    and sends it GPS location.
+    First, we need to connect to a network.
+    Connect to WiFi via:
+  </p>
+  <pre class="code">
+enableWifi('YOUR_NETWORK', 'YOUR_PASSWORD');
+
+// This will log something like:
+"Wifi statuschange" "connecting" bootstrap
+"Wifi statuschange" "associated"
+"Attempting to connect to" "YOUR_NETWORK"
+"Associated" "YOUR_NETWORK"
+"Wifi connection succeeded"
+"Wifi now has IP" "192.168.2.7"</pre>
+  <p>
+    Now start the tracker, by running:
+  </p>
+  <pre class="code">
+tracker.start('http://janjongboom.com:1339', 'YOUR_NAME');
+
+// Log will look like:
+"[Tracker] Creating"
+"[Tracker] Post to" "http://janjongboom.com:1339/register"
+"[Tracker] Registration succeeded, listening on" "XXX"</pre>
+  <p>
+    Now go to the tracker page to send a push message.
+    This page is located at:
+    http://janjongboom.com:1339/location/YOUR_NAME.
+  </p>
+  <p>
+    If you're here click the 'Request new location' button, and switch back to the console.
+    After a second or two the following messages should appear:
+  </p>
+  <pre class="code">
+"[Tracker] got push message!" Object {}
+"autogrant permissions for" Object {}
+"[Tracker] sendLocation" Coordinates {}
+"[Tracker] sent location response" 200</pre>
+  <p>
+    If you go back to the tracker page you'll now see your current location
+    shown on a map.
+  </p>
+  <p>
+    <em>Note: if you see a message about a fake location and a map in Oslo,
+    check the other messages in the console.
+    Probably the GPS lookup failed because of a timeout.</em>
+  </p>
+</div>

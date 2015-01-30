@@ -41,6 +41,12 @@ header .title {
   }
 }
 
+@media (max-width: 650px) {
+  header .title {
+    display: none;
+  }
+}
+
 .menu a {
   color: white;
   display: block;
@@ -61,57 +67,90 @@ header .title {
 .menu a:hover {
   background: #0095DD;
 }
+@media (max-width: 768px) {
+  html, body {
+    font-size: 14px;
+  }
+  header .menu {
+    padding: 0;
+  }
+  .menu a {
+    padding: 1rem 1rem;
+  }
+}
+@media (max-width: 400px) {
+  header .menu {
+    font-size: 3.5vw;
+  }
+  .menu a {
+    padding: 1rem 0.5rem;
+  }
+}
+
 .yolo {
   display: flex;
+}
+.yolo .cover-image {
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
 }
 .yolo .banana {
   height: 34.5vw;
   width: 40vw;
   background-image: url("img/banana.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
 .yolo .keon-board-usb {
   height: 22.5vw;
   width: 30vw;
   background-image: url("img/keon-board-usb.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
 .yolo .gonzo-worked-open {
   height: 22.5vw;
   width: 30vw;
   background-image: url("img/gonzo-worked-open.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
 .yolo .messy-desk {
   height: 22.5vw;
   width: 40.18vw;
   background-image: url("img/messy-desk.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
 .yolo .paper-antenna {
   height: 22.5vw;
   width: 26.78vw;
   background-image: url("img/paper-antenna.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
 .yolo .cross-compile {
   height: 22.5vw;
   width: 31.04vw;
   background-image: url("img/cross-compile.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  flex-shrink: 0;
 }
+.yolo .device-motion {
+  height: 22.5vw;
+  width: 27vw;
+  background-image: url("img/devicemotion.jpg");
+}
+.yolo .briantracker {
+  height: 22.5vw;
+  width: 30.54vw;
+  background-image: url("img/briantracker.jpg");
+}
+@media (max-width: 768px) {
+  .yolo {
+    flex-direction: column;
+  }
+  .yolo .story {
+    margin: 0 1rem;
+  }
+  .yolo .cover-image {
+    width: 100vw;
+    height: 30vw;
+    background-size: 100% auto;
+    background-position: 50%;
+    order: -1;
+  }
+}
+
 .story {
   margin: 0 2rem;
   align-self: center;

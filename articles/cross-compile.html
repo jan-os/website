@@ -20,7 +20,7 @@ title:           Cross compiling C/C++ - JanOS
       </a>
     </p>
   </div>
-  <div class="cross-compile" title="Cross compiled C++ application called from JavaScript"></div>
+  <div class="cover-image cross-compile" title="Cross compiled C++ application called from JavaScript"></div>
 </div>
 
 <div class="section secondary">
@@ -119,7 +119,9 @@ $ ndk-build
   <p>
     Now to call the binary from JavaScript code we use the
     <a href="/api-reference/exec.html">mozOs.exec</a> API.
-    Easiest to test is to attach the debugger, and in the console type:
+    Easiest to test is to attach the
+    <a href="/articles/first-app.html#debugger">debugger</a>, 
+    and in the console type:
   </p>
   <pre class="code">
 navigator.mozOs.exec('hello')
