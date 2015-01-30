@@ -104,6 +104,14 @@ header .title {
   background-size: auto 100%;
   flex-shrink: 0;
 }
+.yolo .cross-compile {
+  height: 22.5vw;
+  width: 31.04vw;
+  background-image: url("img/cross-compile.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  flex-shrink: 0;
+}
 .story {
   margin: 0 2rem;
   align-self: center;
