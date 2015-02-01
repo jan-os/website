@@ -1,0 +1,97 @@
+---
+layout:          default
+tab:             docs
+title:           Logging to a file - JanOS
+---
+<div class="yolo section article">
+  <div class="story left">
+    <h1>Logging to a file</h1>
+    <p>
+      By default you can log messages and debug information to the console,
+      through functions like <span class="code">console.log</span>.
+      This has a big downside, which is that log messages are not preserved
+      between reboots, and data might get lost if the debugger is not attached.
+      This article shows how to log to a file instead.
+    </p>
+  </div>
+  <div class="cover-image cross-compile" title="Let's log these messages to a file instead"></div>
+</div>
+<div class="section secondary">
+  <h3>Intercepting calls to console</h3>
+  <p>
+    We want to keep using the console functions, avoiding to change your current
+    coding style.
+    We just need to intercept the calls being made to the console,
+    and besides showing it in the console, also log it to a file.
+    This snippet (<a target="_blank" href="http://tobyho.com/2012/07/27/taking-over-console-log/">from tobyho.com</a>)
+    intercepts calls to the console:
+  </p>
+  <pre class="code">
+function overwriteConsole() {
+  var console = window.console;
+  function intercept(method) {
+    var original = console[method];
+    console[method] = function() {
+      original.apply(console, arguments);
+
+      // we can do something with the data here...
+    };
+  }
+  var methods = [ 'log', 'warn', 'error' ];
+  for (var i = 0; i < methods.length; i++)
+    intercept(methods[i]);
+}</pre>
+</div>
+
+<div class="secondary section">
+  <h3>Creating a log directory</h3>
+  <p>
+    Now that we have a way of intercepting logging calls it's time to log it
+    to a file.
+    In general you'd want to create a new /logs folder on the device and log
+    there.
+    So create a new directory before we intercept the calls using the
+    <a href="/api-reference/fs.html">filesystem</a> API.
+  </p>
+  <pre class="code">
+navigator.mozOs.createDirectory('/data/local/logs')
+  .then(overwriteConsole)
+  .catch(err => console.error('Could not create "/data/local/logs" folder'));</pre>
+</div>
+
+<div class="secondary section">
+  <h3>Start logging</h3>
+  <p>
+    All is been set up now. Let's serialize all calls to console and store them
+    in a file (per-day) in the new log folder.
+  </p>
+  <pre class="code">
+console[method] = function() {
+  original.apply(console, arguments);
+
+  var logFolder = '/data/local/logs';
+  var logFile = logFolder + '/' + new Date().toISOString().substr(0, 10) + '.log';
+  var line = new Date() + ' ' + method.toUpperCase() + ' ' +
+    args.map((a, ix) => {
+      var v;
+      try {
+        v = JSON.stringify(a);
+      }
+      catch (ex) {
+        v = a + '';
+      }
+      return '[' + ix + '] ' + v;
+    }).join(', ') + '\n';
+
+  navigator.mozOs.appendFile(logFile, line, 'utf-8')
+    .catch(err => {
+      console.error('Appending to logFile failed', err);
+    });
+};</pre>
+  <p>
+    And done. Log something to the console to test it out.
+    To pull the files off of the device, run:
+  </p>
+  <pre class="code">
+$ adb pull /data/local/logs/ .</pre>
+</div>
