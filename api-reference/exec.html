@@ -13,14 +13,14 @@ apiDescription:  The process execution API allows you to run arbitrary executabl
     At the moment this API does not allow streaming, or writing to stdin.
     We welcome <a href="#">pull requests</a>.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 Promise<MozOsExecResponse> exec(DOMString path, optional sequence<DOMString> args);
 
 interface MozOsExecResponse {
   readonly attribute long exitCode;
   readonly attribute DOMString stdout;
   readonly attribute DOMString stderr;
-};</pre>
+};</code></pre>
   <ul>
     <li><span class="code">path</span> The path to the executable (respects PATH)</li>
     <li><span class="code">args</span> An array of arguments to pass into the executable</li>
@@ -29,8 +29,8 @@ interface MozOsExecResponse {
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.exec('ls', [ '-al', '/data/local' ])
   .then(res => console.log('exec', res.exitCode, res.stdout, res.stderr))
-  .catch(err => console.error('exec failed', err));</pre>
+  .catch(err => console.error('exec failed', err));</code></pre>
 </div>

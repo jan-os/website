@@ -12,7 +12,7 @@ title:           Writing your first application - JanOS
       If you need inspiration, we also have a bunch of examples available.
     </p>
     <p>
-      <a target="_blank" class="button" href="/articles/examples.html">
+      <a class="button" href="/articles/examples.html">
         View our examples
       </a>
     </p>
@@ -38,12 +38,13 @@ title:           Writing your first application - JanOS
     to push the data to your board.
     After this you should see the following data in your terminal.
   </p>
-  <pre class="code">3 files pushed. 0 files skipped.
+  <pre><code class="language-bash">
+3 files pushed. 0 files skipped.
 3337 KB/s (893137 bytes in 0.261s)
 [cmd] sh -c adb push "/Volumes/repos/janos/profile/user.js" //data/local/user.js
 750 KB/s (2452 bytes in 0.003s)
 [push] Restarting B2G...
-[cmd] sh -c adb shell start b2g</pre>
+[cmd] sh -c adb shell start b2g</code></pre>
   <p>
     At this point the device should show the JanOS logo, and say 'Booting',
     which transforms into 'Ready' after a few seconds.
@@ -92,7 +93,7 @@ title:           Writing your first application - JanOS
     Create a new file under the apps/system/js/ folder, and name it <em>first-app.js</em>.
     Fill it with the following code:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 // First thing we do is wait until we're booted up
 window.addEventListener('ready', function() {
   // This is the main code for your function
@@ -117,13 +118,13 @@ window.addEventListener('ready', function() {
         });
     }
   });
-});</pre>
+});</code></pre>
   <p>
     Now add the following line right before <span class="code">&lt;/head&gt;</span>
     in apps/system/index.html:
   </p>
-  <pre class="code">
-&lt;script defer src="js/first-app.js"&gt;&lt;/script&gt;</pre>
+  <pre><code class="language-markup">
+&lt;script defer src="js/first-app.js"&gt;&lt;/script&gt;</code></pre>
   <p>
     After running <span class="code">make install-phone</span>, your power button
     will now act as a camera shutter.
@@ -149,12 +150,12 @@ window.addEventListener('ready', function() {
     To get started copy <span class="code">apps/system/js/local_settings.json.example</span> to
     <span class="code">apps/system/js/local_settings.json</span> and open the file in a text editor.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 "cellular": {
   "roaming": false,
   "edgeOnly": false,
   "pin": "0000"
-}</pre>
+}</code></pre>
   <p>
     The cellular section has three options:
   </p>
@@ -169,7 +170,7 @@ window.addEventListener('ready', function() {
     To use this SIM card to now send a SMS message, put the following code in
     <em>first-app.js</em>.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 // First thing we do is wait until we're booted up
 window.addEventListener('ready', function() {
   // Get reference to the connection of SIM1
@@ -195,7 +196,7 @@ window.addEventListener('ready', function() {
       }, 3000);
     }
   });
-});</pre>
+});</code></pre>
   <p>
     Again, <span class="code">make install-phone</span> and the moment the device
     connects to the network, it will send a SMS message to your phone number.

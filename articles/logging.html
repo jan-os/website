@@ -26,7 +26,7 @@ title:           Logging to a file - JanOS
     This snippet (<a target="_blank" href="http://tobyho.com/2012/07/27/taking-over-console-log/">from tobyho.com</a>)
     intercepts calls to the console:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 function overwriteConsole() {
   var console = window.console;
   function intercept(method) {
@@ -40,7 +40,7 @@ function overwriteConsole() {
   var methods = [ 'log', 'warn', 'error' ];
   for (var i = 0; i < methods.length; i++)
     intercept(methods[i]);
-}</pre>
+}</code></pre>
 </div>
 
 <div class="secondary section">
@@ -53,10 +53,10 @@ function overwriteConsole() {
     So create a new directory before we intercept the calls using the
     <a href="/api-reference/fs.html">filesystem</a> API.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.createDirectory('/data/local/logs')
   .then(overwriteConsole)
-  .catch(err => console.error('Could not create "/data/local/logs" folder'));</pre>
+  .catch(err => console.error('Could not create "/data/local/logs" folder'));</code></pre>
 </div>
 
 <div class="secondary section">
@@ -65,7 +65,7 @@ navigator.mozOs.createDirectory('/data/local/logs')
     All is been set up now. Let's serialize all calls to console and store them
     in a file (per-day) in the new log folder.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 console[method] = function() {
   original.apply(console, arguments);
 
@@ -87,11 +87,11 @@ console[method] = function() {
     .catch(err => {
       console.error('Appending to logFile failed', err);
     });
-};</pre>
+};</code></pre>
   <p>
     And done. Log something to the console to test it out.
     To pull the files off of the device, run:
   </p>
-  <pre class="code">
-$ adb pull /data/local/logs/ .</pre>
+  <pre><code class="language-bash">
+$ adb pull /data/local/logs/ .</code></pre>
 </div>

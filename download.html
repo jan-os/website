@@ -1,0 +1,71 @@
+---
+layout:    default
+tab:       download
+title:     Downloads - JanOS
+---
+<div class="yolo section">
+  <div class="story left">
+    <h1>Downloads</h1>
+    <p>
+      This page lists available builds of JanOS.
+      At the moment we have builds available for GeeksPhone Keon and Peak,
+      and the Flame.
+      For information how to build for other devices, see the device list page.
+      The images come with a set of examples which you can try out
+      after flashing.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="/articles/examples.html">
+        View examples
+      </a>
+    </p>
+  </div>
+  <div class="cover-image flame" title="Flame with screen attached after flashing"></div>
+</div>
+
+<div class="section secondary">
+  <h3>Flashing instructions</h3>
+  <p>
+    <strong>WARNING!</strong>
+  </p>
+  <ul>
+    <li>
+      Do <strong>not attempt</strong> to flash on non-supported phones.
+      This will brick your device!
+    </li>
+    <li>
+      Do not remove the mainboard from the device before flashing.
+    </li>
+    <li>
+      This procedure will wipe your device, and the only way to restore
+      your device is through a factory build provided by your device manufacturer.
+    </li>
+  </ul>
+  <p>
+    All good?
+  </p>
+  <ol>
+    <li>Download the build for your device</li>
+    <li>Install <a href="http://lifehacker.com/the-easiest-way-to-install-androids-adb-and-fastboot-to-1586992378" target="_blank">adb and fastboot</a></li>
+    <li>Unzip the build, and run flash.sh or flash.bat</li>
+    <li>Wait until the JanOS logo appears</li>
+  </ol>
+</div>
+
+<div class="section secondary">
+  <h3>Builds</h3>
+  <h4><a href="/builds/janos-flame-kk-2015-02-02.zip">Flame</a></h4>
+  <p class="device-description">
+    Before flashing, make sure you upgraded to base image v180 or higher.
+    <a target="_blank" href="https://developer.mozilla.org/en-US/Firefox_OS/Developer_phone_guide/Flame/Updating_your_Flame">Instructions</a>
+    are provided by Mozilla.
+    Failure to do so might brick your device.
+  </p>
+  <h4>GeeksPhone Keon</h4>
+  <p class="device-description">
+    This build comes with kernel support for 3 GPIO pins, accessible from
+    <span class="code">/sys/devices/platform/gonzo-sysfs</span>.
+    The volume buttons have been disabled.
+  </p>
+  <h4>GeeksPhone Peak</h4>
+</div>

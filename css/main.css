@@ -98,42 +98,47 @@ header .title {
 .yolo .banana {
   height: 34.5vw;
   width: 40vw;
-  background-image: url("img/banana.jpg");
+  background-image: url("../img/banana.jpg");
 }
 .yolo .keon-board-usb {
   height: 22.5vw;
   width: 30vw;
-  background-image: url("img/keon-board-usb.jpg");
+  background-image: url("../img/keon-board-usb.jpg");
 }
 .yolo .gonzo-worked-open {
   height: 22.5vw;
   width: 30vw;
-  background-image: url("img/gonzo-worked-open.jpg");
+  background-image: url("../img/gonzo-worked-open.jpg");
 }
 .yolo .messy-desk {
   height: 22.5vw;
   width: 40.18vw;
-  background-image: url("img/messy-desk.jpg");
+  background-image: url("../img/messy-desk.jpg");
 }
 .yolo .paper-antenna {
   height: 22.5vw;
   width: 26.78vw;
-  background-image: url("img/paper-antenna.jpg");
+  background-image: url("../img/paper-antenna.jpg");
 }
 .yolo .cross-compile {
   height: 22.5vw;
   width: 31.04vw;
-  background-image: url("img/cross-compile.jpg");
+  background-image: url("../img/cross-compile.jpg");
 }
 .yolo .device-motion {
   height: 22.5vw;
   width: 27vw;
-  background-image: url("img/devicemotion.jpg");
+  background-image: url("../img/devicemotion.jpg");
 }
 .yolo .briantracker {
   height: 22.5vw;
   width: 30.54vw;
-  background-image: url("img/briantracker.jpg");
+  background-image: url("../img/briantracker.jpg");
+}
+.yolo .flame {
+  height: 22.5vw;
+  width: 26.58vw;
+  background-image: url("../img/flame.jpg");
 }
 @media (max-width: 768px) {
   .yolo {
@@ -239,4 +244,8 @@ p.code, pre.code {
 }
 .article h1 {
   font-size: 3rem;
+}
+.device-description {
+  margin-top: -1rem;
+  margin-left: 1rem;
 }

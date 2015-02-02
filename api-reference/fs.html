@@ -8,9 +8,8 @@ apiDescription:  The filesystem API gives low level access to the filesystem of 
 ---
 <div class="section secondary" id="readFile">
   <h3>Reading a file</h3>
-  <p class="code">
-    Promise<(DOMString or Uint8Array)> readFile(DOMString path, optional DOMString encoding = "binary");
-  </p>
+  <pre><code class="language-javascript">
+Promise<(DOMString or Uint8Array)> readFile(DOMString path, optional DOMString encoding = "binary");</code></pre>
   <ul>
     <li><span class="code">path</span> The raw path to the file</li>
     <li><span class="code">encoding</span> Either 'binary' or 'utf-8'. If binary, the response is a Uint8Array. If utf-8, the response is a decoded string.</li>
@@ -19,10 +18,10 @@ apiDescription:  The filesystem API gives low level access to the filesystem of 
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.readFile('/data/local/user.js', 'utf-8')
   .then(content => console.log('readFile', content))
-  .catch(err => console.error('readFile', err));</pre>
+  .catch(err => console.error('readFile', err));</code></pre>
 </div>
 
 <div class="section secondary" id="writeFile">
@@ -31,9 +30,9 @@ navigator.mozOs.readFile('/data/local/user.js', 'utf-8')
     If the file exists, the file is overwritten.
     If the file does not exist, it will be created.
   </p>
-  <p class="code">
-    Promise<void> writeFile(DOMString path, (Uint8Array or DOMString) data, optional DOMString encoding = "binary");
-  </p>
+  <pre><code class="language-javascript">
+Promise<void> writeFile(DOMString path, (Uint8Array or DOMString) data, optional DOMString encoding = "binary");
+</code></pre>
   <ul>
     <li><span class="code">path</span> The raw path to the file</li>
     <li><span class="code">data</span> The data to write to the file. A Uint8Array if binary encoding, or a string if utf-8 encoding.</li>
@@ -43,10 +42,10 @@ navigator.mozOs.readFile('/data/local/user.js', 'utf-8')
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.writeFile('/data/local/janos', 'Hello world', 'utf-8')
   .then(() => console.log('Write succeeded')
-  .catch(err => console.error('Write failed', err));</pre>
+  .catch(err => console.error('Write failed', err));</code></pre>
 </div>
 
 <div class="section secondary" id="appendFile">
@@ -55,9 +54,9 @@ navigator.mozOs.writeFile('/data/local/janos', 'Hello world', 'utf-8')
     If the file exists, it appends the data passed into the file.
     If the file does not exist, it will be created.
   </p>
-  <p class="code">
-    Promise<void> appendFile(DOMString path, (Uint8Array or DOMString) data, optional DOMString encoding = "binary");
-  </p>
+  <pre><code class="language-javascript">
+Promise<void> appendFile(DOMString path, (Uint8Array or DOMString) data, optional DOMString encoding = "binary");
+</code></pre>
   <ul>
     <li><span class="code">path</span> The raw path to the file</li>
     <li><span class="code">data</span> The data to write to the file. A Uint8Array if binary encoding, or a string if utf-8 encoding.</li>
@@ -67,10 +66,10 @@ navigator.mozOs.writeFile('/data/local/janos', 'Hello world', 'utf-8')
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.appendFile('/data/local/janos', '\nAnother line', 'utf-8')
   .then(() => console.log('Append succeeded')
-  .catch(err => console.error('Append failed', err));</pre>
+  .catch(err => console.error('Append failed', err));</code></pre>
 </div>
 
 <div class="section secondary" id="removeFile">
@@ -78,9 +77,9 @@ navigator.mozOs.appendFile('/data/local/janos', '\nAnother line', 'utf-8')
   <p>
     If the file does not exist, the promise will be rejected.
   </p>
-  <p class="code">
-    Promise<void> removeFile(DOMString path);
-  </p>
+  <pre><code class="language-javascript">
+Promise<void> removeFile(DOMString path);
+</code></pre>
   <ul>
     <li><span class="code">path</span> The raw path to the file</li>
     <li><span class="code">returns</span> A promise which will resolve when the remove succeeded</li>
@@ -88,17 +87,17 @@ navigator.mozOs.appendFile('/data/local/janos', '\nAnother line', 'utf-8')
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.removeFile('/data/local/janos')
   .then(() => console.log('Remove succeeded')
-  .catch(err => console.error('Remove failed', err));</pre>
+  .catch(err => console.error('Remove failed', err));</code></pre>
 </div>
 
 <div class="section secondary" id="createDirectory">
   <h3>Creating a directory</h3>
-  <p class="code">
-    Promise<void> createDirectory(DOMString path, optional boolean ignoreExisting = true);
-  </p>
+  <pre><code class="language-javascript">
+Promise<void> createDirectory(DOMString path, optional boolean ignoreExisting = true);
+</code></pre>
   <ul>
     <li><span class="code">path</span> The raw path to the dictionary</li>
     <li><span class="code">ignoreExisting</span> When true, the promise will resolve also when the directory already exists</li>
@@ -107,8 +106,8 @@ navigator.mozOs.removeFile('/data/local/janos')
   <p>
     Example:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 navigator.mozOs.createDirectory('/data/local/logs', true)
   .then(() => console.log('CreateDirectory succeeded')
-  .catch(err => console.error('CreateDirectory failed', err));</pre>
+  .catch(err => console.error('CreateDirectory failed', err));</code></pre>
 </div>

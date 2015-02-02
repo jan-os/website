@@ -31,11 +31,12 @@ title:           Some examples - JanOS
     console window. This is the axis on which you can measure gravity.
     For example, see what happens when you turn the board upside down.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 devicemotion.start();
 
 // to stop
-devicemotion.stop();</pre>
+devicemotion.stop();
+</code></pre>
 </div>
 
 <div class="section secondary">
@@ -48,18 +49,18 @@ devicemotion.stop();</pre>
     If you have two cameras on the board, you can use 'front' instead of
     'back' as well.
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 securityCam.start('back', 5000);
 
 // it will now make a photo every 5s. and log a message
 // when you're done:
-securityCam.stop();</pre>
+securityCam.stop();</code></pre>
   <p>
     Now you can grab the photos of the device via adb.
     Navigate to an empty folder, and run the following command:
   </p>
-  <pre class="code">
-$ adb pull /data/local/security/ .</pre>
+  <pre><code class="language-bash">
+$ adb pull /data/local/security/ .</code></pre>
 </div>
 
 <div class="section secondary">
@@ -73,21 +74,21 @@ $ adb pull /data/local/security/ .</pre>
     If you don't know the bluetooth address of your speaker, enable it and then
     run:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 window.findBluetoothDevices();
 
 // Will log something like:
 "Starting discovery"
 "Found device" "00:0C:8A:75:EF:31" "Bose Mini Sou" "audio-card"
-"Stopping discovery"</pre>
+"Stopping discovery"</code></pre>
   <p>
     We now use the address that has been logged to start the demo:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 doorbell.start("00:0C:8A:75:EF:31");
 
 // And to stop
-doorbell.stop();</pre>
+doorbell.stop();</code></pre>
   <p>
     Hover your hand over the proximity sensor to hear the doorbell sound playing.
   </p>
@@ -103,7 +104,7 @@ doorbell.stop();</pre>
     First, we need to connect to a network.
     Connect to WiFi via:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 enableWifi('YOUR_NETWORK', 'YOUR_PASSWORD');
 
 // This will log something like:
@@ -112,17 +113,17 @@ enableWifi('YOUR_NETWORK', 'YOUR_PASSWORD');
 "Attempting to connect to" "YOUR_NETWORK"
 "Associated" "YOUR_NETWORK"
 "Wifi connection succeeded"
-"Wifi now has IP" "192.168.2.7"</pre>
+"Wifi now has IP" "192.168.2.7"</code></pre>
   <p>
     Now start the tracker, by running:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 tracker.start('http://janjongboom.com:1339', 'YOUR_NAME');
 
 // Log will look like:
 "[Tracker] Creating"
 "[Tracker] Post to" "http://janjongboom.com:1339/register"
-"[Tracker] Registration succeeded, listening on" "XXX"</pre>
+"[Tracker] Registration succeeded, listening on" "XXX"</code></pre>
   <p>
     Now go to the tracker page to send a push message.
     This page is located at:
@@ -132,11 +133,11 @@ tracker.start('http://janjongboom.com:1339', 'YOUR_NAME');
     If you're here click the 'Request new location' button, and switch back to the console.
     After a second or two the following messages should appear:
   </p>
-  <pre class="code">
+  <pre><code class="language-javascript">
 "[Tracker] got push message!" Object {}
 "autogrant permissions for" Object {}
 "[Tracker] sendLocation" Coordinates {}
-"[Tracker] sent location response" 200</pre>
+"[Tracker] sent location response" 200</code></pre>
   <p>
     If you go back to the tracker page you'll now see your current location
     shown on a map.
