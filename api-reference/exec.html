@@ -3,7 +3,7 @@ layout:          api
 title:           Process Execution API - JanOS
 apiTitle:        Process API
 apiDescription:  The process execution API allows you to run arbitrary executables
-                 from JavaScript. Read our docs on <a href="#">cross compiling</a>
+                 from JavaScript. Read our docs on <a href="/articles/cross-compile.html">cross compiling</a>
                  executables for JanOS.
                  It's function are exposed under <span class="code">navigator.mozOs</span>.
 ---
@@ -11,7 +11,7 @@ apiDescription:  The process execution API allows you to run arbitrary executabl
   <h3>Running an executable</h3>
   <p>
     At the moment this API does not allow streaming, or writing to stdin.
-    We welcome <a href="#">pull requests</a>.
+    We welcome <a target="_blank" href="https://github.com/jan-os/gecko-dev/tree/os-module">pull requests</a>.
   </p>
   <pre><code class="language-javascript">
 Promise<MozOsExecResponse> exec(DOMString path, optional sequence<DOMString> args);
