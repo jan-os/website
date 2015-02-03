@@ -140,6 +140,11 @@ header .title {
   width: 26.58vw;
   background-image: url("../img/flame.jpg");
 }
+.yolo .power {
+  height: 22.5vw;
+  width: 28.20vw;
+  background-image: url("../img/power.jpg");
+}
 @media (max-width: 768px) {
   .yolo {
     flex-direction: column;

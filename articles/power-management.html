@@ -1,0 +1,146 @@
+---
+layout:          default
+tab:             docs
+title:           Power Management - JanOS
+---
+<div class="yolo section article">
+  <div class="story left">
+    <h1>Power management</h1>
+    <p>
+      When developing for mobile and embedded devices, good power management
+      makes a big difference in battery life.
+      This article describes some techniques on how to deal with power management.
+      If you want to measure power consumption instead (always a good idea),
+      use the link below.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="https://hacks.mozilla.org/2014/04/measuring-power-consumption-on-phones/">
+        Learn how to measure power consumption
+      </a>
+    </p>
+  </div>
+  <div class="cover-image power" title="Power testing setup"></div>
+</div>
+<div class="secondary section">
+  <h3>Screen</h3>
+  <p>
+    To avoid power drainage, turn off the screen from software whenever possible.
+    This also applies if you do not have the screen connected.
+    Because limitations in JanOS, the graphics stack is still active even when
+    the screen has been detached when the screen is not turned off from software,
+    thus draining battery power.
+    You can use the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.mozPower" target="_blank">mozPower</a> API
+    to achieve this.
+  </p>
+  <pre><code class="language-javascript">
+navigator.mozPower.screenEnabled = false;
+
+// To re-enable
+navigator.mozPower.screenEnabled = true;
+</code></pre>
+  <p>
+    The downside of disabling the screen is that certain sensors will be disabled,
+    like the accelerometer and the proximity sensor.
+    If you want to do a reading of one of these sensors, turn on the screen,
+    wait until the measurement is in, and disable the screen again.
+    For example, for the accelerometer:
+  </p>
+  <pre><code class="language-javascript">
+navigator.mozPower.screenEnabled = true;
+
+// Orientation only works when the screen is on
+window.addEventListener('devicemotion', function odm(e) {
+  window.removeEventListener('devicemotion', odm);
+
+  var x = e.accelerationIncludingGravity.x;
+  var y = e.accelerationIncludingGravity.y;
+
+  // Do something with the data, and:
+  navigator.mozPower.screenEnabled = false;
+});
+</code></pre>
+</div>
+<div class="secondary section">
+  <h3>CPU</h3>
+  <p>
+    By default JanOS does not allow the CPU to go into sleep state.
+    This is a good choice when you're doing continuous measurements,
+    but can drain your battery too.
+    If you do not need the CPU to stay awake, allow the CPU to sleep through
+    the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.mozPower" target="_blank">mozPower</a> API.
+  </p>
+  <pre><code class="language-javascript">
+navigator.mozPower.cpuSleepAllowed = true;
+</code></pre>
+  <h4>Wakelocks</h4>
+  <p>
+    The issue now is that the CPU might go to sleep while you are f.e. waiting
+    for an asynchronous operation to succeed.
+    Whenever you do not want the CPU to sleep, you will need to acquire a wakelock.
+  </p>
+  <pre><code class="language-javascript">
+// Acquire wakelock
+var lock = navigator.requestWakeLock('cpu');
+
+// Make an async call to a web server
+var x = new XMLHttpRequest({ mozSystem: true });
+x.onload = function() {
+  // When done, release the wakelock again
+  lock.unlock();
+};
+x.open('GET', 'http://janos.io');
+x.send();
+</code></pre>
+  <h4>Timers</h4>
+  <p>
+    When the CPU is asleep, normal JavaScript timers like <span class="code">setTimeout</span>
+    might no longer firing at the scheduled time.
+    The callback will be invoked whenever the CPU seems fit.
+    If you need to wake up the device at certain points in time,
+    you will have to use the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.mozAlarms" target="_blank">mozAlarms</a> API.
+  </p>
+  <pre><code class="language-javascript">
+// First schedule an alarm for 30 seconds from now
+var r = navigator.mozAlarms.add(new Date(Date.now() + 30000), 'ignoreTimezone', {
+  type: 'my-awesome-alarm'
+});
+r.onsuccess = () => console.log('All OK!');
+r.onerror = () => console.error('Creating alarm failed!', r.error);
+
+// Here we handle incoming alarms
+navigator.mozSetMessageHandler('alarm', function(e) {
+  if (e.data.type !== 'my-awesome-alarm') return;
+
+  // Acquire wakelock
+  var wl = navigator.requestWakeLock('cpu');
+
+  // Do your thing
+  doSomething(() => {
+    // When done, release the wakelock again
+    wl.unlock();
+  });
+});
+</code></pre>
+  <p>
+    <em>Please note that the CPU will never sleep when connected to USB or power.
+    This makes troubleshooting harder.
+    If you run into issues when the CPU is asleep, extensively
+    <a href="/articles/logging.html">log to files</a>
+    instead of the console to make debugging easier.</em>
+  </p>
+  <h4>Server communication</h4>
+  <p>
+    If you depend on a third party service to notify you when to wake up
+    and do something, you cannot simply keep a socket open.
+    For this purpose you can use the SimplePush API.
+    As this requires both a client and server setup, the easiest way
+    to deal with it, is to watch the 5 minute tutorial video.
+  </p>
+  <p>
+    <a target="_blank" class="button" href="https://www.youtube.com/watch?v=qpgNIsJ2pg4">
+      Watch how to use push notifications
+    </a>
+  </p>
+</div>
