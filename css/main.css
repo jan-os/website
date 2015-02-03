@@ -195,7 +195,7 @@ header .title {
 li {
   line-height: 1.8rem;
 }
-.secondary a, .api a {
+.secondary a, .api a, .story a:not(.button) {
   color: #0095DD;
   text-decoration: none;
 }
