@@ -145,6 +145,11 @@ header .title {
   width: 28.20vw;
   background-image: url("../img/power.jpg");
 }
+.yolo .jsconfeu {
+  height: 30vw;
+  width: 35.44vw;
+  background-image: url("../img/jsconfeu.jpg");
+}
 @media (max-width: 768px) {
   .yolo {
     flex-direction: column;

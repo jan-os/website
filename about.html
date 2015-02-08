@@ -1,0 +1,129 @@
+---
+layout:    default
+title:     About JanOS
+---
+<div class="yolo section">
+  <div class="story left">
+    <h1>About JanOS</h1>
+    <p>
+      JanOS is an alternative operating system for mobile phones,
+      designed to run on devices without their screen attached.
+      It was demonstrated as a proof of concept during
+      <a href="http://2014.jsconf.eu/speakers/#/speakers/jan-jongboom-abusing-phones-to-make-the-internet-of-things" target="_blank">JSConf.EU 2014</a>.
+      Shortly after it was chosen as the OS that powers Gonzo,
+      a cellular connected and low-power camera.
+      The project is maintained and funded by
+      <a href="http://telenordigital.com/" target="_blank">Telenor Digital</a>.
+    </p>
+    <p>
+      <a target="_blank" class="button" href="http://ee.telenor.io/about-gonzo/">
+        Learn more about Gonzo
+      </a>
+    </p>
+  </div>
+  <div class="cover-image jsconfeu" title="First demonstration of JanOS during JSConf.eu 2014"></div>
+</div>
+<div class="section secondary">
+  <h3>History</h3>
+  <p>
+    In the winter of 2013-2014 Olav Nymoen
+    was working on a concept where he would replace the Firefox OS frontend
+    with a cloud-based website.
+    This meant stripping down the OS to it's bare bones, and then building it up
+    again.
+    Although this project got nowhere, it planted an important seed.
+    A few months later Sergi Mansilla and Jan Jongboom, working on very cheap
+    Firefox OS phones, were amazed by the qualities of these sub-30$ phones,
+    especially compared to exisiting internet of things boards like the Arduino.
+    Jan figured it would make for a very interesting project to re-use
+    these cheap phones as proper IoT boards, and wrote a proposal for JSConf.EU,
+    which was accepted.
+  </p>
+  <p>
+    Without a working proof of concept, but with a talk coming up,
+    Jan started in August 2014 on stripping down Firefox OS.
+    After a week of hacking the OS would
+    <a target="_blank" href="https://github.com/jan-os/janos/blob/79bfb63325b6a49767e214a6c45929e2f7b5ed93/apps/system/index.html">boot</a>,
+    although it took until September until cellular connectivity worked.
+    A week before JSConf the mainboard was removed from it's casing for the first
+    time, and it took a few all-nighters to figure out how to not overheat
+    the device, and when the battery needed to be connected.
+  </p>
+  <p>
+    End of September the project was demonstrated to great interest at JSConf.EU.
+    As no-one had any inspiration, and the project was not meant to stick,
+    the name remained JanOS.
+  </p>
+  <p>
+    <img src="../img/jsconf1.jpg">
+  </p>
+  <p>
+    The day after the presentation Jan and Olav came together during a Telenor Digital
+    offsite event in Lom, Norway; and discussed potential real use cases for
+    the project. During these days they came up with a low-powered cellular-connected
+    camera which you could stick anywhere.
+    Going to a URL would wake up the device and send a still photo.
+    This project was pitched to upper management over beer, and within a few
+    days the project got successfully accepted in the Exploratory Engineering
+    project ran by Telenor's Chief Scientist Bjorn Borud.
+  </p>
+  <p>
+    In the project Thomas Langas joined the project as hardware engineer,
+    and he started work on hardware design; PCBs; and hacking volume buttons
+    into GPIO ports. He is also responsible for any kernel work in JanOS.
+    The work done for Gonzo got then back ported into JanOS,
+    which transformed from a simple alternative frontend for Firefox OS to
+    a proper OS with it's own kernel changes and new APIs.
+  </p>
+  <p>
+    In December 2014 a
+    <a href="http://ee.telenor.io/gonzo/hardware/2014/12/16/firefox-os-iot.html" target="_blank">blog post about the project</a>
+    reached number 1 in Reddit Programming, after which was decided to turn JanOS
+    into a real project, with documentation; builds; and a website.
+  </p>
+</div>
+<div class="secondary section">
+  <h3>JanOS & Firefox OS</h3>
+  <p>
+    Originally meant as an alternative frontend to Firefox OS,
+    the project still owes a ton to Mozilla's project and uses ~80%
+    of all Firefox OS code.
+    Here's a small comparison on changes that were made compared to Firefox OS.
+  </p>
+  <ul>
+    <li>
+      Gonk (kernel):
+        Updated the kernel to re-map buttons to act as GPIO ports,
+        and ship a different set of misc binaries.
+    </li>
+    <li>
+      Gecko (render engine):
+        Add new APIs to deal with process execution and low-level
+        device access.
+    </li>
+    <li>
+      Gaia (frontend):
+        We use a few files from the Firefox OS frontend, mainly around
+        APN resolution and CPU wake locks.
+    </li>
+  </ul>
+  <p>
+    We intend to contribute our changes in Gecko back to Mozilla,
+    but so far Mozilla did not take any interest in them.
+  </p>
+</div>
+<div class="secondary section">
+  <h3>Source Code</h3>
+  <p>
+    All source code, from website to kernel changes, is hosted in our
+    GitHub repository.
+    If you have generic improvements that would also benefit Firefox OS,
+    please commit them to Mozilla's official repositories,
+    which acts as the upstream to most JanOS repositories.
+  </p>
+  <p>
+    <a target="_blank" class="button" href="https://github.com/jan-os/">
+      JanOS on GitHub
+    </a>
+  </p>
+</div>
