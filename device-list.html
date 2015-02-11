@@ -61,18 +61,18 @@ title:     Device List - JanOS
     and save it on your local hard drive under <em>b2g-janos/janos-manifests/DEVICENAME.xml</em>.
     Open the file and add under the <span class="code">&lt;remote ...</span> sections:
   </p>
-  <p class="code">
-    &lt;remote name="jan-os" fetch="git://github.com/jan-os/" />
-  </p>
+  <pre><code class="language-markup">
+&lt;remote name="jan-os" fetch="git://github.com/jan-os/" /&gt;
+</code></pre>
   <p>
     Then find the lines for all projects with name 'gaia'; 'gecko'; 'gonzo-misc',
     and remove them. In their place add:
   </p>
-  <p class="code">
-    &lt;project name="gecko" path="gecko" remote="jan-os" revision="master"/&gt;<br>
-    &lt;project name="janos" path="gaia" remote="jan-os" revision="master"/&gt;<br>
-    &lt;project name="gonk-misc" path="gonk-misc" remote="jan-os" revision="master"/&gt;
-  </p>
+  <pre><code class="language-markup">
+&lt;project name="gecko-dev" path="gecko" remote="jan-os" revision="os-module"/&gt;<br>
+&lt;project name="janos" path="gaia" remote="jan-os" revision="master"/&gt;<br>
+&lt;project name="gonk-misc" path="gonk-misc" remote="jan-os" revision="master"/&gt;
+</code></pre>
   <p>
     If you manage to get a new device building, and it runs without issues,
     we welcome a pull request on the jan-os/b2g repository.
