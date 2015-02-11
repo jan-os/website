@@ -166,6 +166,13 @@ header .title {
   }
 }
 
+@media (min-width: 1600px) {
+  .yolo .cover-image {
+    max-width: 50%;
+    max-height: 50vh;
+  }
+}
+
 .story {
   margin: 0 2rem;
   align-self: center;
