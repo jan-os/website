@@ -98,8 +98,8 @@ title:           Writing your first application - JanOS
 window.addEventListener('ready', function() {
   // This is the main code for your function
   // We'll wait for a press on the POWER button, and in that case take a photo
-  window.addEventListener('mozChromeEvent', function(e) {
-    if (e.detail.type === 'sleep-button-press') {
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Power') {
       // Call the camera helper to take a photo from the back camera
       window.camera.takePicture('back')
         // takePicture returns a promise
